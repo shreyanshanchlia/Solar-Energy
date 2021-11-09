@@ -1,10 +1,13 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Draggable : MonoBehaviour
 {
     [SerializeField] private bool draggableOnAwake = false;
+    [SerializeField] private float snappingDistance;
     private bool isDragging = false;
+
+    [SerializeField] private UnityEvent onDragComplete;
     
     private void Start()
     {
@@ -20,13 +23,25 @@ public class Draggable : MonoBehaviour
         if (isDragging)
         {
             UpdatePosition();
-            if (Input.GetMouseButtonUp(0)) isDragging = false;
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDragging = false;
+                transform.Snap(snappingDistance);
+                onDragComplete.Invoke();
+            }
         }
     }
 
-    void UpdatePosition()
+    public void DisableDrag()
     {
-        this.transform.position = (Vector2)Cam.main.ScreenToWorldPoint(Input.mousePosition);
+        isDragging = false;
+        transform.Snap(snappingDistance);
+        enabled = false;
+    }
+
+    private void UpdatePosition()
+    {
+        transform.position = (Vector2)Cam.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseDrag() => isDragging = true;
