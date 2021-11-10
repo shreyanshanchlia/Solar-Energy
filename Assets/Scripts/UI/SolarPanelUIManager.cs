@@ -1,5 +1,8 @@
+using System;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SolarPanelUIManager : MonoBehaviour
 {
@@ -13,6 +16,22 @@ public class SolarPanelUIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                DeselectedPanel();
+            }
+        }
+    }
+
+    private void DeselectedPanel()
+    {
+        panelInformationPanel.SetActive(false);
     }
 
     public void SelectedPanel(PanelPropertiesData data)
