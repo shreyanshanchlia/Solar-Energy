@@ -6,9 +6,6 @@ public class PanelProperties : MonoBehaviour
 {
     [ReadOnly, SerializeField] private PanelPropertiesData panelPropertiesData;
 
-    bool isSelected;
-
-
     private void Start()
     {
         panelPropertiesData = new PanelPropertiesData(SolarGrid.Instance.GetPanelNumber(gameObject));
@@ -17,13 +14,13 @@ public class PanelProperties : MonoBehaviour
     [UsedImplicitly]
     public void PanelSelected()
     {
-        isSelected = true;
         SolarPanelUIManager.Instance.SelectedPanel(panelPropertiesData);
     }
 
     public void PanelOverlayAvoid()
     {
-        if (SolarGrid.Instance.CheckForPanelAtPosition(transform.position, gameObject))
+        if (SolarGrid.Instance.CheckForPanelAtPosition(transform.position, gameObject) ||
+            SolarGrid.Instance.CheckForOccupiedSpaceAtPosition(transform.position, null))
         {
             gameObject.SetActive(false);
             SolarGrid.Instance.MoveToInactivePanel(gameObject);

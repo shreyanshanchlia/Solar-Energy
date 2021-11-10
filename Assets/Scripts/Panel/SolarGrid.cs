@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,25 +6,24 @@ public class SolarGrid : MonoBehaviour
 {
     public static SolarGrid Instance;
 
-    /// <summary>
-    /// count of total panels - active and destroyed.
-    /// </summary>
+    /// <summary> count of total panels - active and destroyed. </summary>
     private int panelsIssued;
 
-    /// <summary>
-    /// Reference to all the active panels.
-    /// </summary>
+    public List<GameObject> linkNodes;
+    /// <summary> Reference to all the active panels.</summary>
     public List<GameObject> activePanels;
-
-    /// <summary>
-    /// Reference to all the inactive panels.
-    /// </summary>
+    /// <summary> Reference to all the inactive panels.</summary>
     public List<GameObject> inactivePanels;
+    
+    public List<Tuple<GameObject, GameObject>> wiredLinks;
 
     private void Awake()
     {
         Instance = this;
         activePanels = new List<GameObject>();
+        inactivePanels = new List<GameObject>();
+        linkNodes = new List<GameObject>();
+        wiredLinks = new List<Tuple<GameObject, GameObject>>();
     }
 
     public int GetPanelNumber(GameObject _newPanel)
@@ -54,6 +54,32 @@ public class SolarGrid : MonoBehaviour
         }
         return false;
     }
+    public GameObject GetPanelAtPosition(Vector3 position)
+    {
+        foreach (GameObject panel in activePanels)
+        {
+            if (Mathf.Approximately(panel.transform.position.x, position.x) && 
+                Mathf.Approximately(panel.transform.position.y, position.y))
+            {
+                return panel;
+            }
+        }
+        return null;
+    }
+    public bool CheckForOccupiedSpaceAtPosition(Vector3 position, GameObject toAvoid)
+    {
+        foreach (GameObject space in linkNodes)
+        {
+            if(toAvoid == space) continue;
+            
+            if (Mathf.Approximately(space.transform.position.x, position.x) && 
+                Mathf.Approximately(space.transform.position.y, position.y))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void MoveToInactivePanel(GameObject panel)
     {
@@ -67,6 +93,17 @@ public class SolarGrid : MonoBehaviour
             Debug.LogError("No panel to deactivate");
         }
     }
+
+    public void AddLinkNode(GameObject extensionWire)
+    {
+        linkNodes.Add(extensionWire);
+    }
+
+    public void AddWiredLink(GameObject a, GameObject b)
+    {
+        wiredLinks.Add(new Tuple<GameObject, GameObject>(a, b));
+    }
+    
 
     public void ActivatePanel(GameObject panel)
     {

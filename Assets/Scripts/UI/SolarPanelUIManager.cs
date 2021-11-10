@@ -13,6 +13,7 @@ public class SolarPanelUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI orientationAngleText;
     [SerializeField] private TextMeshProUGUI efficiencyText;
     [SerializeField] private TextMeshProUGUI sizeText;
+    
     private void Awake()
     {
         Instance = this;

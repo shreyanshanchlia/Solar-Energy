@@ -1,11 +1,7 @@
  using UnityEngine;
- using System.Collections;
- 
+
  public class GridOverlay : MonoBehaviour
  {
- 
-     //public GameObject plane;
- 
      public bool showMain = true;
      public bool showSub = false;
  
@@ -24,23 +20,29 @@
  
      public  Color mainColor = new Color(0f, 1f, 0f, 1f);
      public Color subColor = new Color(0f, 0.5f, 0f, 1f);
- 
+     
+     private static readonly int SrcBlend = Shader.PropertyToID("_SrcBlend");
+     private static readonly int DstBlend = Shader.PropertyToID("_DstBlend");
+     private static readonly int Cull = Shader.PropertyToID("_Cull");
+     private static readonly int ZWrite = Shader.PropertyToID("_ZWrite");
+
      void CreateLineMaterial()
      {
          if (!lineMaterial)
          {
-             // Unity has a built-in shader that is useful for drawing
-             // simple colored things.
-             var shader = Shader.Find("Hidden/Internal-Colored");
-             lineMaterial = new Material(shader);
-             lineMaterial.hideFlags = HideFlags.HideAndDontSave;
+             // Unity built-in shader for drawing simple colored things.
+             Shader shader = Shader.Find("Hidden/Internal-Colored");
+             lineMaterial = new Material(shader)
+             {
+                 hideFlags = HideFlags.HideAndDontSave
+             };
              // Turn on alpha blending
-             lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-             lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+             lineMaterial.SetInt(SrcBlend, (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+             lineMaterial.SetInt(DstBlend, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
              // Turn backface culling off
-             lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+             lineMaterial.SetInt(Cull, (int)UnityEngine.Rendering.CullMode.Off);
              // Turn off depth writes
-             lineMaterial.SetInt("_ZWrite", 0);
+             lineMaterial.SetInt(ZWrite, 0);
          }
      }
  

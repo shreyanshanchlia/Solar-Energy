@@ -13,5 +13,10 @@ public class Instantiation : MonoBehaviour
     {
         InstantiateGameObject(defaultGameObject);
     }
+    public void InstantiateDefaultOnSameParent()
+    {
+        instantiationParent = transform.parent;
+        InstantiateGameObject(defaultGameObject);
+    }
     
 }
