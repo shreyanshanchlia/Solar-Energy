@@ -3,15 +3,15 @@ using UnityEngine;
 public class PanelCreator : MonoBehaviour
 {
     [Header("Settings")]
-    public KeyCode createPanelKey;
+    public KeyCode createKey;
 
     [Header("References")] 
-    [SerializeField] private Transform solarGrid;
-    [SerializeField] private GameObject solarPanelPrefab;
+    [SerializeField] private Transform instantiationParent;
+    [SerializeField] private GameObject spawnPrefab;
     
     private void Update()
     {
-        if (Input.GetKeyUp(createPanelKey))
+        if (Input.GetKeyUp(createKey))
         {
             AddPanel();
         }
@@ -19,6 +19,6 @@ public class PanelCreator : MonoBehaviour
 
     private void AddPanel()
     {
-        Instantiate(solarPanelPrefab, solarGrid);
+        Instantiate(spawnPrefab, instantiationParent);
     }
 }
