@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e46f0d744f476d4c9919205f54e5c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measurementResult: {fileID: 2296550080169103376, guid: 35b788ac3165c85459d16740e5025587, type: 3}
 --- !u!114 &4699488521611541245
 MonoBehaviour:
   m_ObjectHideFlags: 0

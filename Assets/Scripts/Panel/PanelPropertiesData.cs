@@ -31,9 +31,9 @@ public class PanelPropertiesData
 
     public float GetIncidentEnergy()
     {
-        return Mathf.Clamp(SolarManager.Instance.TotalSunEnergy * size.x * size.y * 
+        return Mathf.Clamp(SolarManager.Instance.TotalSunEnergy * size.x * size.y *
                            Mathf.Sin(Mathf.Deg2Rad * (SolarManager.Instance.angleOfSun + orientationX)),
-            0, SolarManager.Instance.TotalSunEnergy);
+            0, SolarManager.Instance.TotalSunEnergy * size.x * size.y);
     }
 
     public float GetOutputEnergy()

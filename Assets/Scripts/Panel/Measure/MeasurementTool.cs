@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MeasurementTool : MonoBehaviour
 {
+    [SerializeField] private GameObject measurementResult;
     float? CalculateTotalEnergyOfGrid()
     {
         float resultantEnergy = 0f;
@@ -41,7 +43,13 @@ public class MeasurementTool : MonoBehaviour
 
     public void CalculateEnergy()
     {
-        Debug.Log($"Total connected energy = {CalculateTotalEnergyOfGrid()}");
+        float? totalEnergy = CalculateTotalEnergyOfGrid();
+        if (totalEnergy == null) return;
+
+        GameObject _measurementResult = Instantiate(measurementResult);
+        _measurementResult.GetComponentInChildren<TextMeshProUGUI>().text =
+            $"Total energy of the connected grid is <b>{totalEnergy:F3}W.";
+        Destroy(_measurementResult, 8f);
     }
 
     PanelProperties GetPanelProperties(GameObject _panelGameObject) => _panelGameObject.GetComponent<PanelProperties>();
