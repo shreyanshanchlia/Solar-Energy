@@ -44,11 +44,11 @@ public class SolarPanelUIManager : MonoBehaviour
         panelGlobalSunInformation.SetActive(true);
     }
 
-    public void SelectedPanel(PanelPropertiesData data)
+    public void SelectedPanel(ref PanelPropertiesData data)
     {
         panelInformationPanel.SetActive(true);
         panelGlobalSunInformation.SetActive(false);
-        
+         
         //set details on canvas
         productIDText.text = $"Product ID - {data.id}";
         orientationAngleText.text = $"Angle <pos=50%>{data.orientationX}°";

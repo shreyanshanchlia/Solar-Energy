@@ -14,7 +14,7 @@ public class PanelProperties : MonoBehaviour
     [UsedImplicitly]
     public void PanelSelected()
     {
-        SolarPanelUIManager.Instance.SelectedPanel(panelPropertiesData);
+        SolarPanelUIManager.Instance.SelectedPanel(ref panelPropertiesData);
     }
 
     public void PanelOverlayAvoid()
