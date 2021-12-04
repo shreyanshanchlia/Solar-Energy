@@ -102,8 +102,8 @@ public class SolarGrid : MonoBehaviour
     public void AddWiredLink(GameObject a, GameObject b)
     {
         wiredLinks.Add(new Tuple<GameObject, GameObject>(a, b));
+        wiredLinks.Add(new Tuple<GameObject, GameObject>(b, a));
     }
-    
 
     public void ActivatePanel(GameObject panel)
     {

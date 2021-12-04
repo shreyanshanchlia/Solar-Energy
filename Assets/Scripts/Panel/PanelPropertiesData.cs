@@ -28,4 +28,16 @@ public class PanelPropertiesData
     {
         _id = System.Guid.NewGuid().ToString().Substring(4,10) + panelNumber.ToString("D4");
     }
+
+    public float GetIncidentEnergy()
+    {
+        return Mathf.Clamp(SolarManager.Instance.TotalSunEnergy * size.x * size.y * 
+                           Mathf.Sin(Mathf.Deg2Rad * (SolarManager.Instance.angleOfSun + orientationX)),
+            0, SolarManager.Instance.TotalSunEnergy);
+    }
+
+    public float GetOutputEnergy()
+    {
+        return GetIncidentEnergy() * efficiency;
+    }
 }

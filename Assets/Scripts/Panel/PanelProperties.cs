@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanelProperties : MonoBehaviour
 {
-    [ReadOnly, SerializeField] private PanelPropertiesData panelPropertiesData;
+    [ReadOnly] public PanelPropertiesData panelPropertiesData;
 
     private void Start()
     {

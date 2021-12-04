@@ -43,10 +43,12 @@ public class CreateWire : MonoBehaviour
         }
         else
         {
+            Destroy(this.gameObject);
+            Destroy(_lineRenderer.gameObject);
             //create an extension wire cord.
-            SolarGrid.Instance.AddWiredLink(SolarGrid.Instance.GetPanelAtPosition(_lineRenderer.GetPosition(0)),
-                gameObject);
-            SolarGrid.Instance.AddLinkNode(gameObject);
+            // SolarGrid.Instance.AddWiredLink(SolarGrid.Instance.GetPanelAtPosition(_lineRenderer.GetPosition(0)),
+            //     gameObject);
+            // SolarGrid.Instance.AddLinkNode(gameObject);
         }
         enabled = false;
     }

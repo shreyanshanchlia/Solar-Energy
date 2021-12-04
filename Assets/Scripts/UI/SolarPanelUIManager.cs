@@ -55,11 +55,10 @@ public class SolarPanelUIManager : MonoBehaviour
         efficiencyText.text = $"Efficiency <pos=50%>{data.efficiency:P}";
         sizeText.text = $"Size <pos=50%>{data.size.x}m × {data.size.y}m";
 
-        float incidentEnergy = SolarManager.Instance.TotalSunEnergy * data.size.x * data.size.y *
-                               Mathf.Sin(Mathf.Deg2Rad * (SolarManager.Instance.angleOfSun + data.orientationX));
-        energyInputText.text = $"Incident Energy <pos=50%>{incidentEnergy}W";
-        energyOutputText.text = $"Output Energy <pos=50%>{incidentEnergy * data.efficiency}W";
+        energyInputText.text = $"Incident Energy <pos=50%>{data.GetIncidentEnergy():f3}W";
+        energyOutputText.text = $"Output Energy <pos=50%>{data.GetOutputEnergy():f3}W";
+        
         rayImageTransform.eulerAngles = (SolarManager.Instance.angleOfSun - 90) * Vector3.forward;
-        solarPanel3dGameObject.transform.eulerAngles = new Vector3(0, 0, data.orientationX);
+        solarPanel3dGameObject.transform.eulerAngles = new Vector3(0, 0, -data.orientationX);
     }
 }
