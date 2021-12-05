@@ -78,34 +78,34 @@ public class SolarPanelUIManager : MonoBehaviour
 
     void OnOrientationChangeSubscribe(GameObject panelProperties)
     {
-        orientationAngleInputField.onValueChanged.AddListener((val) =>
+        orientationAngleInputField.onEndEdit.AddListener((val) =>
         {
-            float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.orientationX);
-            SelectedPanel(panelProperties);
+            if (float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.orientationX))
+                SelectedPanel(panelProperties);
         });
     }
     void OnEfficiencyChangeSubscribe(GameObject panelProperties)
     {
-        efficiencyInputField.onValueChanged.AddListener((val) =>
+        efficiencyInputField.onEndEdit.AddListener((val) =>
         {
-            float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.efficiency);
-            SelectedPanel(panelProperties);
+            if (float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.efficiency))
+                SelectedPanel(panelProperties);
         });
     }
     void OnSizeXChangeSubscribe(GameObject panelProperties)
     {
-        sizeTextXInputField.onValueChanged.AddListener((val) =>
+        sizeTextXInputField.onEndEdit.AddListener((val) =>
         {
-            float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.size.x);
-            SelectedPanel(panelProperties);
+            if (float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.size.x))
+                SelectedPanel(panelProperties);
         });
     }
     void OnSizeYChangeSubscribe(GameObject panelProperties)
     {
-        sizeTextYInputField.onValueChanged.AddListener((val) =>
+        sizeTextYInputField.onEndEdit.AddListener((val) =>
         {
-            float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.size.y);
-            SelectedPanel(panelProperties);
+            if (float.TryParse(val, out panelProperties.GetComponent<PanelProperties>().panelPropertiesData.size.y))
+                SelectedPanel(panelProperties);
         });
     }
 }

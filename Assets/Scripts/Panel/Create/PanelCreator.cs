@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PanelCreator : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PanelCreator : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyUp(createKey))
+        if (Input.GetKeyUp(createKey) && EventSystem.current.currentSelectedGameObject == null)
         {
             AddPanel();
         }
