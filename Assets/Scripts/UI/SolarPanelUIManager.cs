@@ -80,10 +80,25 @@ public class SolarPanelUIManager : MonoBehaviour
 
     void RefreshInputFields()
     {
-        orientationAngleInputField = Instantiate(orientationAngleInputField, orientationAngleInputField.transform.parent);
-        efficiencyInputField = Instantiate(efficiencyInputField, efficiencyInputField.transform.parent);
-        sizeTextXInputField = Instantiate(sizeTextXInputField, sizeTextXInputField.transform.parent);
-        sizeTextYInputField = Instantiate(sizeTextYInputField, sizeTextYInputField.transform.parent);
+        TMP_InputField tmpInputField = Instantiate(orientationAngleInputField, orientationAngleInputField.transform.parent);
+        tmpInputField.gameObject.name = "InputField (TMP)";
+        Destroy(orientationAngleInputField.gameObject);
+        orientationAngleInputField = tmpInputField;
+        
+        tmpInputField = Instantiate(efficiencyInputField, efficiencyInputField.transform.parent);
+        tmpInputField.gameObject.name = "InputField (TMP)";
+        Destroy(efficiencyInputField.gameObject);
+        efficiencyInputField = tmpInputField;
+        
+        tmpInputField = Instantiate(sizeTextXInputField, sizeTextXInputField.transform.parent);
+        tmpInputField.gameObject.name = "InputField (TMP)";
+        Destroy(sizeTextXInputField.gameObject);
+        sizeTextXInputField = tmpInputField;
+        
+        tmpInputField = Instantiate(sizeTextYInputField, sizeTextYInputField.transform.parent);
+        tmpInputField.gameObject.name = "InputField (TMP)";
+        Destroy(sizeTextYInputField.gameObject);
+        sizeTextYInputField = tmpInputField;
     }
     
     void OnOrientationChangeSubscribe(GameObject panelProperties)
