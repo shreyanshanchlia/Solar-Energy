@@ -59,6 +59,8 @@ public class SolarPanelUIManager : MonoBehaviour
         efficiencyInputField.onValueChanged = new TMP_InputField.OnChangeEvent();
         sizeTextXInputField.onValueChanged = new TMP_InputField.OnChangeEvent();
         sizeTextYInputField.onValueChanged = new TMP_InputField.OnChangeEvent();
+
+        RefreshInputFields();
         
         //set details on canvas
         productIDText.text = $"Product ID - {data.id}";
@@ -76,6 +78,14 @@ public class SolarPanelUIManager : MonoBehaviour
         OnSizeYChangeSubscribe(panelProperties);
     }
 
+    void RefreshInputFields()
+    {
+        orientationAngleInputField = Instantiate(orientationAngleInputField, orientationAngleInputField.transform.parent);
+        efficiencyInputField = Instantiate(efficiencyInputField, efficiencyInputField.transform.parent);
+        sizeTextXInputField = Instantiate(sizeTextXInputField, sizeTextXInputField.transform.parent);
+        sizeTextYInputField = Instantiate(sizeTextYInputField, sizeTextYInputField.transform.parent);
+    }
+    
     void OnOrientationChangeSubscribe(GameObject panelProperties)
     {
         orientationAngleInputField.onEndEdit.AddListener((val) =>
